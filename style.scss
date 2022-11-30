@@ -36,6 +36,7 @@ body {
   min-height: 100vh;
   display: grid;
   place-content: center;
+  font-family: "Roboto", sans-serif;
 }
 // main
 main {
@@ -50,28 +51,53 @@ main {
   align-items: center;
   padding: 30px;
   width: 370px;
-  height: 530px;
+  height: auto;
   border-radius: 15px;
+  gap: 36px;
 }
-
 .display {
   background-color: #b0b7bf;
   width: 320px;
   height: 70px;
+  font-weight: 700;
+  font-size: 20px;
+  padding: 11px;
 }
 .operations {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 20px;
-  .btn {
-    padding: 20px;
-    border-radius: 50%;
-    background-color: #979da6;
-    cursor: pointer;
-    border: none;
-  }
+
   .btn--equal {
     grid-row: 4/6;
     grid-column: 4/5;
+    border-radius: 11px;
+    height: auto;
+  }
+  .btn--equal:hover {
+    transform: scale(1.05);
+  }
+  .btn--equal:active {
+    transform: translate(0, 3px);
+  }
+}
+.btn {
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  background-color: #979da6;
+  cursor: pointer;
+  border: none;
+  font-family: "Roboto", sans-serif;
+  font-size: 27px;
+  font-weight: 700;
+  padding: 0;
+  transition: active 0.1s ease-out, translate 0.2s ease-in;
+  box-shadow: 1px 7px 7px #202026;
+  &:hover {
+    transform: scale(1.1);
+  }
+  &:active {
+    transform: translate(0, 6px);
   }
 }
