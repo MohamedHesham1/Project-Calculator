@@ -38,30 +38,40 @@ body {
   place-content: center;
   font-family: "Roboto", sans-serif;
 }
-// main
-main {
-}
 
 // calculator
 .calculator {
-  background-color: #323640;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  background-color: #323640;
   align-items: center;
   padding: 30px;
   width: 370px;
   height: auto;
   border-radius: 15px;
   gap: 36px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  filter: drop-shadow(0 0 0.75rem #1a1616);
 }
-.display {
-  background-color: #b0b7bf;
+.monitor {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  background-color: #ffffff;
   width: 320px;
   height: 70px;
   font-weight: 700;
   font-size: 20px;
   padding: 11px;
+  border-radius: 13px;
+  .expression {
+    flex: 1;
+  }
+  .result {
+    flex: 1;
+  }
 }
 .operations {
   display: grid;
@@ -85,14 +95,15 @@ main {
   border-radius: 50%;
   width: 60px;
   height: 60px;
-  background-color: #979da6;
+  background-color: #fcf6eaeb;
   cursor: pointer;
   border: none;
   font-family: "Roboto", sans-serif;
   font-size: 27px;
   font-weight: 700;
   padding: 0;
-  transition: active 0.1s ease-out, translate 0.2s ease-in;
+  color: #202026;
+  transition: scale 0.5s ease-out, scale 0.2s ease-in;
   box-shadow: 1px 7px 7px #202026;
   &:hover {
     transform: scale(1.1);
