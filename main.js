@@ -57,9 +57,17 @@ function operate(a, operator, b) {
   return result;
 }
 
-function multiply(num1, num2) {
-  console.log(num1 * num2);
+function calculate() {
+  operations.addEventListener("click", (e) => {
+    if (e.target.classList.contains("btn--equal")) {
+      clearResult();
+      result.innerText = operate(oldValue, operator, currentValue);
+      expression.innerText += currentValue;
+      isCalculated = true;
 }
+  });
+}
+calculate();
 
 function divide(num1, num2) {
   console.log(num1 / num2);
