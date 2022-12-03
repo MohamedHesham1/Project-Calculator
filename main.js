@@ -1,10 +1,33 @@
 import "./style.scss";
 
-function sum(num1, num2) {
-  console.log(num1 + num2);
+let currentValue;
+let oldValue;
+let operator;
+let isCalculated;
+const result = document.querySelector(".result");
+const expression = document.querySelector(".expression");
+const operations = document.querySelector(".operations");
+
+function operate(a, operator, b) {
+  let result;
+  clearResult();
+  if (operator == "/") {
+    result = a / b;
+  }
+  if (operator == "*") {
+    result = a * b;
+  }
+  if (operator == "+") {
+    result = a + b;
+  }
+  if (operator == "-") {
+    result = a - b;
 }
-function subtract(num1, num2) {
-  console.log(num1 - num2);
+  if (operator == "%") {
+    result = a % b;
+  }
+  console.log(result);
+  return result;
 }
 
 function multiply(num1, num2) {
