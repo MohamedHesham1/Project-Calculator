@@ -8,6 +8,18 @@ const result = document.querySelector(".result");
 const expression = document.querySelector(".expression");
 const operations = document.querySelector(".operations");
 
+function displayNumbers() {
+  operations.addEventListener("click", (e) => {
+    if (e.target.classList.contains("btn--num")) {
+      if (isCalculated) {
+        clearAll();
+      }
+      result.innerText += e.target.innerText;
+      currentValue = Number(result.innerText);
+      console.log("currentValue " + currentValue);
+    }
+  });
+}
 function operate(a, operator, b) {
   let result;
   clearResult();
