@@ -20,6 +20,21 @@ function displayNumbers() {
     }
   });
 }
+function displayExpression() {
+  displayNumbers();
+
+  operations.addEventListener("click", (e) => {
+    if (e.target.classList.contains("btn--operator")) {
+      operator = e.target.value;
+      oldValue = Number(currentValue);
+      expression.innerText = `${oldValue} ${operator}\xa0`;
+      clearResult();
+      console.log("oldValue " + oldValue);
+    }
+  });
+}
+displayExpression();
+
 function operate(a, operator, b) {
   let result;
   clearResult();
