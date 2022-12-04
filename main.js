@@ -70,7 +70,7 @@ function displayInBottom(value) {
 // storing values
 
 function getValue1() {
-  const value = Number(displayBottom.innerText);
+  const value = displayBottom.innerText;
   return value;
 }
 
@@ -80,21 +80,12 @@ function getValue2() {
 }
 
 function getResult(a, operator, b) {
-  if (operator == "/") {
-    return a / b;
-  }
-  if (operator == "*") {
-    return a * b;
-  }
-  if (operator == "+") {
-    return a + b;
-  }
-  if (operator == "-") {
-    return a - b;
-  }
-  if (operator == "%") {
-    return a % b;
-  }
+  if (b == 0) return "Can't divide by zero";
+  if (operator == "/") return Number(a / b);
+  if (operator == "*") return Number(a * b);
+  if (operator == "+") return Number(+a + +b);
+  if (operator == "-") return Number(a - b);
+  if (operator == "%") return Number(a % b);
 }
 
 // boolean function
