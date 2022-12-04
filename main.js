@@ -29,9 +29,11 @@ function displayNumbers() {
 
 function displayOperations() {
   operations.addEventListener("click", (e) => {
-    if (e.target.classList.contains("btn--operator") && !isEmpty()) {
+    const operatorBtn = e.target.classList.contains("btn--operator");
+    if (operatorBtn && !isEmpty()) {
       operator = e.target.value;
       value2 = getValue2();
+
       displayInTop(`${value2} ${operator}\xa0`);
       clearBottom();
     }
@@ -40,7 +42,9 @@ function displayOperations() {
 
 function displayResult() {
   operations.addEventListener("click", (e) => {
-    if (e.target.classList.contains("btn--equal") && !isEmpty()) {
+    const equalBtn = e.target.classList.contains("btn--equal");
+
+    if (equalBtn && value2 && !isEmpty()) {
       updateDisplay();
       displayInBottom(getResult(value2, operator, value1));
     }
