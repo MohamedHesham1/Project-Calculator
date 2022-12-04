@@ -3,9 +3,9 @@ import "./style.scss";
 const operations = document.querySelector(".operations");
 const displayBottom = document.querySelector(".display-bottom");
 const displayTop = document.querySelector(".display-top");
-let operator;
-let value2;
-let value1;
+let operator = "";
+let value2 = "";
+let value1 = "";
 
 // main function
 function calculator() {
@@ -21,6 +21,7 @@ calculator();
 function displayNumbers() {
   operations.addEventListener("click", (e) => {
     if (e.target.classList.contains("btn--num")) {
+      if (isEmpty() && e.target.value == ".") return;
       displayInBottom(e.target.innerText);
       value1 = getValue1();
     }
@@ -95,7 +96,7 @@ function getResult(a, operator, b) {
 // boolean function
 
 function isEmpty() {
-  if (getValue1() == 0 && getValue2() == 0) {
+  if (getValue1() == "" && getValue2() == "") {
     return true;
   } else {
     return false;
