@@ -66,10 +66,12 @@ body {
   font-size: 20px;
   padding: 11px;
   border-radius: 13px;
-  .expression {
+  .display-top {
+    font-size: 16px;
+    font-weight: lighter;
     flex: 1;
   }
-  .result {
+  .display-bottom {
     flex: 1;
   }
 }

@@ -1,91 +1,129 @@
 import "./style.scss";
 
-let currentValue;
-let oldValue;
-let operator;
-let isCalculated;
-const result = document.querySelector(".result");
-const expression = document.querySelector(".expression");
 const operations = document.querySelector(".operations");
+const displayBottom = document.querySelector(".display-bottom");
+const displayTop = document.querySelector(".display-top");
+let operator;
+let value2;
+let value1;
+
+// main function
+function calculator() {
+  displayNumbers();
+  displayOperations();
+  displayResult();
+  clear();
+}
+calculator();
+
+// display functions
 
 function displayNumbers() {
   operations.addEventListener("click", (e) => {
     if (e.target.classList.contains("btn--num")) {
-      if (isCalculated) {
-        clearAll();
-      }
-      result.innerText += e.target.innerText;
-      currentValue = Number(result.innerText);
-      console.log("currentValue " + currentValue);
+      displayInBottom(e.target.innerText);
+      value1 = getValue1();
     }
   });
 }
 
-// numbers
-function displayExpression() {
-  displayNumbers();
+function displayOperations() {
+  operations.addEventListener("click", (e) => {
+    if (e.target.classList.contains("btn--operator") && !isEmpty()) {
+      operator = e.target.value;
+      value2 = getValue2();
+      displayInTop(`${value2} ${operator}\xa0`);
+      clearBottom();
+    }
+  });
+}
 
+function displayResult() {
+  operations.addEventListener("click", (e) => {
+    if (e.target.classList.contains("btn--equal") && !isEmpty()) {
+      updateDisplay();
+      displayInBottom(getResult(value2, operator, value1));
+    }
+  });
+}
+
+function updateDisplay() {
   operations.addEventListener("click", (e) => {
     if (e.target.classList.contains("btn--operator")) {
-      operator = e.target.value;
-      oldValue = Number(currentValue);
-      expression.innerText = `${oldValue} ${operator}\xa0`;
-      clearResult();
-      console.log("oldValue " + oldValue);
+      clearTop();
+      displayInTop(`${value2} ${operator}\xa0`);
     }
   });
-}
-displayExpression();
 
-function operate(a, operator, b) {
-  let result;
-  clearResult();
+  displayInTop(getValue1());
+  clearBottom();
+}
+
+function displayInTop(value) {
+  displayTop.innerText += value;
+}
+
+function displayInBottom(value) {
+  displayBottom.innerText += value;
+}
+
+// storing values
+
+function getValue1() {
+  const value = Number(displayBottom.innerText);
+  return value;
+}
+
+function getValue2() {
+  const value = getValue1();
+  return value;
+}
+
+function getResult(a, operator, b) {
   if (operator == "/") {
-    result = a / b;
+    return a / b;
   }
   if (operator == "*") {
-    result = a * b;
+    return a * b;
   }
   if (operator == "+") {
-    result = a + b;
+    return a + b;
   }
   if (operator == "-") {
-    result = a - b;
+    return a - b;
   }
   if (operator == "%") {
-    result = a % b;
+    return a % b;
   }
-  console.log(result);
-  return result;
 }
 
-function calculate() {
-  operations.addEventListener("click", (e) => {
-    if (e.target.classList.contains("btn--equal")) {
-      clearResult();
-      result.innerText = operate(oldValue, operator, currentValue);
-      expression.innerText += currentValue;
-      isCalculated = true;
-    }
+// boolean function
+
+function isEmpty() {
+  if (getValue1() == 0 && getValue2() == 0) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+// clear functions
+
+function clear() {
+  const clearBtn = document.querySelector(".btn--clear");
+  clearBtn.addEventListener("click", () => {
+    clearTop();
+    clearBottom();
+    value1 = "";
+    value2 = "";
+    operator = "";
   });
 }
-calculate();
 
-function clearExpression() {
-  expression.innerText = "";
+function clearTop() {
+  displayTop.innerText = "";
 }
 
-function clearResult() {
-  result.innerText = "";
+function clearBottom() {
+  displayBottom.innerText = "";
 }
-
-function clearAll() {
-  clearExpression();
-  clearResult();
-  currentValue = "";
-  oldValue = "";
-  operator = "";
-  isCalculated = false;
-}
-
-// \xa0
