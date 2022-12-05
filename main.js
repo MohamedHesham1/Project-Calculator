@@ -16,6 +16,7 @@ function calculator() {
   displayResult();
   clearBtn();
   backspaceBtn();
+  decimalSeparator();
 }
 calculator();
 
@@ -24,7 +25,6 @@ calculator();
 function displayNumbers() {
   operations.addEventListener("click", (e) => {
     if (e.target.classList.contains("btn--num")) {
-      if (isEmpty() && e.target.value == ".") return;
       if (isPressed) {
         clearAll();
       }
@@ -122,9 +122,9 @@ function isEmpty() {
 function chainOperation() {
   const temp = value1;
   value1 = getResult(value2, operator, temp);
+
   displayInTop(`${value1} ${operator}`);
   clearTop();
-
   clearBottom();
   displayInBottom(value1);
 }
@@ -139,8 +139,15 @@ function backspaceBtn() {
   });
 }
 
-function decimalMarker() {
+function decimalSeparator() {
   const dot = document.querySelector(".btn--decimal");
+  dot.addEventListener("click", (e) => {
+    if (isEmpty()) {
+      displayInBottom("0.");
+    }
+    if (displayBottom.innerText.includes(".")) return;
+    displayInBottom(e.target.value);
+  });
 }
 
 // clear functions
