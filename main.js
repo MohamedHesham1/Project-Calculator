@@ -52,8 +52,10 @@ function displayResult() {
     const equalBtn = e.target.classList.contains("btn--equal");
 
     if (equalBtn && value2 && !isEmpty()) {
+      if (!isPressed) {
       updateDisplay();
       displayInBottom(getResult(value2, operator, value1));
+      }
       isPressed = true;
     }
   });
