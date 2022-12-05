@@ -6,13 +6,15 @@ const displayTop = document.querySelector(".display-top");
 let operator = "";
 let value2 = "";
 let value1 = "";
+let isPressed;
 
 // main function
 function calculator() {
   displayNumbers();
   displayOperations();
   displayResult();
-  clear();
+  checkCondition();
+  clearBtn();
 }
 calculator();
 
@@ -22,6 +24,9 @@ function displayNumbers() {
   operations.addEventListener("click", (e) => {
     if (e.target.classList.contains("btn--num")) {
       if (isEmpty() && e.target.value == ".") return;
+      if (isPressed) {
+        clearAll();
+      }
       displayInBottom(e.target.innerText);
       value1 = getValue1();
     }
@@ -34,6 +39,7 @@ function displayOperations() {
     if (operatorBtn && !isEmpty()) {
       operator = e.target.value;
       value2 = getValue2();
+      isPressed = false;
 
       displayInTop(`${value2} ${operator}\xa0`);
       clearBottom();
@@ -48,6 +54,7 @@ function displayResult() {
     if (equalBtn && value2 && !isEmpty()) {
       updateDisplay();
       displayInBottom(getResult(value2, operator, value1));
+      isPressed = true;
     }
   });
 }
@@ -102,17 +109,28 @@ function isEmpty() {
     return false;
   }
 }
+function checkCondition() {
+  operations.addEventListener("click", (e) => {
+    if (e.target.classList.contains("btn--num")) {
+    }
+  });
+}
 
 // clear functions
 
-function clear() {
+function clearAll() {
+  clearTop();
+  clearBottom();
+  value1 = "";
+  value2 = "";
+  operator = "";
+  isPressed = false;
+}
+
+function clearBtn() {
   const clearBtn = document.querySelector(".btn--clear");
   clearBtn.addEventListener("click", () => {
-    clearTop();
-    clearBottom();
-    value1 = "";
-    value2 = "";
-    operator = "";
+    clearAll();
   });
 }
 
