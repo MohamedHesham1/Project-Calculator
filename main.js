@@ -136,6 +136,15 @@ function clearBtn() {
   });
 }
 
+function backspaceBtn() {
+  const backspace = document.querySelector(".backspace-btn");
+  backspace.addEventListener("click", () => {
+    const value = getValue1();
+    clearBottom();
+    displayInBottom(value.slice(0, -1));
+    console.log(typeof value);
+  });
+}
 function clearTop() {
   displayTop.innerText = "";
 }
