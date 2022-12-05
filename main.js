@@ -7,14 +7,15 @@ let operator = "";
 let value2 = "";
 let value1 = "";
 let isPressed;
+let counter = false;
 
 // main function
 function calculator() {
   displayNumbers();
   displayOperations();
   displayResult();
-  checkCondition();
   clearBtn();
+  backspaceBtn();
 }
 calculator();
 
@@ -37,10 +38,15 @@ function displayOperations() {
   operations.addEventListener("click", (e) => {
     const operatorBtn = e.target.classList.contains("btn--operator");
     if (operatorBtn && !isEmpty()) {
+      if (counter) {
+        chainOperation();
+        counter = false;
+      }
+
       operator = e.target.value;
       value2 = getValue2();
       isPressed = false;
-
+      counter = true;
       displayInTop(`${value2} ${operator}\xa0`);
       clearBottom();
     }
@@ -53,10 +59,11 @@ function displayResult() {
 
     if (equalBtn && value2 && !isEmpty()) {
       if (!isPressed) {
-      updateDisplay();
-      displayInBottom(getResult(value2, operator, value1));
+        updateDisplay();
+        displayInBottom(getResult(value2, operator, value1));
       }
       isPressed = true;
+      counter = false;
     }
   });
 }
@@ -111,11 +118,29 @@ function isEmpty() {
     return false;
   }
 }
-function checkCondition() {
-  operations.addEventListener("click", (e) => {
-    if (e.target.classList.contains("btn--num")) {
-    }
+
+function chainOperation() {
+  const temp = value1;
+  value1 = getResult(value2, operator, temp);
+  displayInTop(`${value1} ${operator}`);
+  clearTop();
+
+  clearBottom();
+  displayInBottom(value1);
+}
+
+// buttons
+function backspaceBtn() {
+  const backspace = document.querySelector(".backspace-btn");
+  backspace.addEventListener("click", () => {
+    const value = getValue1();
+    clearBottom();
+    displayInBottom(value.slice(0, -1));
   });
+}
+
+function decimalMarker() {
+  const dot = document.querySelector(".btn--decimal");
 }
 
 // clear functions
@@ -127,6 +152,7 @@ function clearAll() {
   value2 = "";
   operator = "";
   isPressed = false;
+  counter = false;
 }
 
 function clearBtn() {
@@ -136,15 +162,6 @@ function clearBtn() {
   });
 }
 
-function backspaceBtn() {
-  const backspace = document.querySelector(".backspace-btn");
-  backspace.addEventListener("click", () => {
-    const value = getValue1();
-    clearBottom();
-    displayInBottom(value.slice(0, -1));
-    console.log(typeof value);
-  });
-}
 function clearTop() {
   displayTop.innerText = "";
 }
