@@ -77,11 +77,6 @@ body {
   }
 }
 // main
-main {
-  display: grid;
-  place-content: center;
-  margin-block-start: 4rem;
-}
 
 //  calculator
 .calculator {
@@ -169,4 +164,38 @@ main {
 .operator-color {
   background-color: #1a1e26;
   color: #ffffff;
+}
+
+// mobile
+@media (max-width: 715px) {
+  .calculator {
+    width: 340px;
+    margin-block-start: 20vh;
+  }
+  .monitor {
+    width: 300px;
+  }
+  .operations {
+    gap: 18px;
+  }
+  .info {
+    height: 328px;
+    width: 430px;
+
+    .header {
+      font-size: 18px;
+    }
+    .profile {
+      inset-block-start: 62px;
+      inset-inline-start: 2px;
+      padding: 0;
+      font-size: 16px;
+    }
+  }
+}
+@media (max-width: 463px) and (max-height: 702) {
+  .info {
+    height: 308px;
+    width: 364px;
+  }
 }
