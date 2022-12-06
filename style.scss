@@ -108,6 +108,8 @@ main {
     grid-column: 4/5;
     border-radius: 11px;
     height: auto;
+    background-color: #8b8abf;
+    color: #ffffff;
   }
   .btn--equal:hover {
     transform: scale(1.05);
@@ -120,7 +122,7 @@ main {
   border-radius: 50%;
   width: 60px;
   height: 60px;
-  background-color: #fcf6eaeb;
+  background-color: #ffffff;
   cursor: pointer;
   border: none;
   font-family: "Roboto", sans-serif;
@@ -136,4 +138,8 @@ main {
   &:active {
     transform: translate(0, 6px);
   }
+}
+.operator-color {
+  background-color: #1a1e26;
+  color: #ffffff;
 }
