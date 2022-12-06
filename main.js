@@ -101,7 +101,7 @@ function getValue2() {
 }
 
 function getResult(a, operator, b) {
-  if (b == 0) return "Can't divide by zero";
+  if (b == 0 && operator == "/") return "Can't divide by zero";
   if (operator == "/") return Number(a / b);
   if (operator == "*") return Number(a * b);
   if (operator == "+") return Number(+a + +b);
