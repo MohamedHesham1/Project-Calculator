@@ -15,6 +15,7 @@
   </head>
   <body>
     <div id="app">
+      <!-- header -->
       <header>
         <div class="info">
           <h1 class="header">
@@ -31,12 +32,15 @@
           </div>
         </div>
       </header>
+      <!-- main -->
       <main>
         <div class="calculator">
+          <!-- monitor -->
           <div class="monitor">
             <div class="display-top"></div>
             <div class="display-bottom"></div>
           </div>
+          <!-- operations -->
           <div class="operations">
             <button type="button" class="btn btn--clear operator-color">
               c
@@ -45,6 +49,7 @@
               type="button"
               class="btn btn--operator operator-color"
               value="/"
+              data-key="111"
             >
               &div;
             </button>
@@ -52,39 +57,87 @@
               type="button"
               class="btn btn--operator operator-color"
               value="*"
+              data-key="106"
             >
               &times;
             </button>
-            <button type="button" class="btn backspace-btn operator-color">
+            <button
+              type="button"
+              class="btn backspace-btn operator-color"
+              data-key="8"
+            >
               &#x2B05;
             </button>
-            <button type="button" class="btn btn--num">7</button>
-            <button type="button" class="btn btn--num">8</button>
-            <button type="button" class="btn btn--num">9</button>
+            <button type="button" class="btn btn--num" value="7" data-key="103">
+              7
+            </button>
+            <button type="button" class="btn btn--num" value="8" data-key="104">
+              8
+            </button>
+            <button type="button" class="btn btn--num" value="9" data-key="105">
+              9
+            </button>
             <button
               type="button"
               class="btn btn--operator operator-color"
               value="-"
+              data-key="109"
             >
               &minus;
             </button>
-            <button type="button" class="btn btn--num">4</button>
-            <button type="button" class="btn btn--num">5</button>
-            <button type="button" class="btn btn--num">6</button>
+            <button type="button" class="btn btn--num" value="4" data-key="100">
+              4
+            </button>
+            <button type="button" class="btn btn--num" value="5" data-key="101">
+              5
+            </button>
+            <button type="button" class="btn btn--num" value="6" data-key="102">
+              6
+            </button>
             <button
               type="button"
               class="btn btn--operator operator-color"
               value="+"
+              data-key="107"
             >
               +
             </button>
-            <button type="button" class="btn btn--num">1</button>
-            <button type="button" class="btn btn--num">2</button>
-            <button type="button" class="btn btn--num">3</button>
-            <button type="button" class="btn btn--equal">=</button>
-            <button type="button" class="btn btn--operator" value="%">%</button>
-            <button type="button" class="btn btn--num">0</button>
-            <button type="button" class="btn btn--decimal" value=".">.</button>
+            <button type="button" class="btn btn--num" value="1" data-key="97">
+              1
+            </button>
+            <button type="button" class="btn btn--num" value="2" data-key="98">
+              2
+            </button>
+            <button type="button" class="btn btn--num" value="3" data-key="99">
+              3
+            </button>
+            <button
+              type="button"
+              class="btn btn--equal"
+              value="="
+              data-key="13"
+            >
+              =
+            </button>
+            <button
+              type="button"
+              class="btn btn--operator"
+              value="%"
+              data-key="53"
+            >
+              %
+            </button>
+            <button type="button" class="btn btn--num" value="0" data-key="96">
+              0
+            </button>
+            <button
+              type="button"
+              class="btn btn--decimal"
+              value="."
+              data-key="110"
+            >
+              .
+            </button>
           </div>
         </div>
       </main>

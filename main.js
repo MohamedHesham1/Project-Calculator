@@ -6,7 +6,7 @@ const displayTop = document.querySelector(".display-top");
 let operator = "";
 let value2 = "";
 let value1 = "";
-let isPressed;
+let equalClicked;
 let counter = false;
 
 // main function
@@ -15,8 +15,8 @@ function calculator() {
   displayOperations();
   displayResult();
   clearBtn();
-  backspaceBtn();
-  decimalSeparator();
+  removeNumber();
+  handleDecimal();
 }
 calculator();
 
@@ -25,11 +25,11 @@ calculator();
 function displayNumbers() {
   operations.addEventListener("click", (e) => {
     if (e.target.classList.contains("btn--num")) {
-      if (isPressed) {
+      if (equalClicked) {
         clearAll();
       }
       displayInBottom(e.target.innerText);
-      value1 = getValue1();
+      value1 = getCurrentValue();
     }
   });
 }
@@ -44,8 +44,8 @@ function displayOperations() {
       }
 
       operator = e.target.value;
-      value2 = getValue2();
-      isPressed = false;
+      value2 = getCurrentValue();
+      equalClicked = false;
       counter = true;
       displayInTop(`${value2} ${operator}\xa0`);
       clearBottom();
@@ -58,11 +58,11 @@ function displayResult() {
     const equalBtn = e.target.classList.contains("btn--equal");
 
     if (equalBtn && value2 && !isEmpty()) {
-      if (!isPressed) {
+      if (!equalClicked) {
         updateDisplay();
         displayInBottom(getResult(value2, operator, value1));
       }
-      isPressed = true;
+      equalClicked = true;
       counter = false;
     }
   });
@@ -76,7 +76,7 @@ function updateDisplay() {
     }
   });
 
-  displayInTop(getValue1());
+  displayInTop(getCurrentValue());
   clearBottom();
 }
 
@@ -90,34 +90,21 @@ function displayInBottom(value) {
 
 // storing values
 
-function getValue1() {
+function getCurrentValue() {
   const value = displayBottom.innerText;
   return value;
 }
 
-function getValue2() {
-  const value = getValue1();
-  return value;
-}
-
 function getResult(a, operator, b) {
-  if (b == 0 && operator == "/") return "Can't divide by zero";
-  if (operator == "/") return Number(a / b);
-  if (operator == "*") return Number(a * b);
-  if (operator == "+") return Number(+a + +b);
-  if (operator == "-") return Number(a - b);
-  if (operator == "%") return Number(a % b);
+  if (b === 0 && operator === "/") return "Can't divide by zero";
+  if (operator === "/") return Number(a / b);
+  if (operator === "*") return Number(a * b);
+  if (operator === "+") return Number(+a + +b);
+  if (operator === "-") return Number(a - b);
+  if (operator === "%") return Number(a % b);
 }
 
-// boolean function
-
-function isEmpty() {
-  if (getValue1() == "" && getValue2() == "") {
-    return true;
-  } else {
-    return false;
-  }
-}
+const isEmpty = () => getCurrentValue() === "" && getCurrentValue() === "";
 
 function chainOperation() {
   const temp = value1;
@@ -130,16 +117,16 @@ function chainOperation() {
 }
 
 // buttons
-function backspaceBtn() {
+function removeNumber() {
   const backspace = document.querySelector(".backspace-btn");
   backspace.addEventListener("click", () => {
-    const value = getValue1();
+    const value = getCurrentValue();
     clearBottom();
     displayInBottom(value.slice(0, -1));
   });
 }
 
-function decimalSeparator() {
+function handleDecimal() {
   const dot = document.querySelector(".btn--decimal");
   dot.addEventListener("click", (e) => {
     if (isEmpty()) {
@@ -158,7 +145,7 @@ function clearAll() {
   value1 = "";
   value2 = "";
   operator = "";
-  isPressed = false;
+  equalClicked = false;
   counter = false;
 }
 
